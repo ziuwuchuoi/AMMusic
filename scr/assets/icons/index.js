@@ -1,0 +1,1 @@
+export {default as IC_BACK} from './Back.png';
