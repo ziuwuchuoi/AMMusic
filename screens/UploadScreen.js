@@ -21,19 +21,18 @@ export class UploadScreen extends Component {
           </View>
           <View style={styles.titleContainer}>
             <Text style={styles.appName}>A M</Text>
-            <Text style={styles.appTitle}>G E N E R A T E M U S I C</Text>
+            <Text style={styles.appTitle}>G   E   N   E   R   A   T   E   M   U   S   I   C</Text>
           </View>
         </View>
         <View style={styles.bottomContainer}>
           <Text style={styles.reviewTitle}>
             This app will generate {'\n'}music based on your music files!
           </Text>
-          <TouchableOpacity
-            style={styles.buttonContainer}
-            onPress={() => {}}>
-                <Image source={IC_UPLOAD}></Image>
-                <Text>Upload</Text>
-            </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonContainer} onPress={() => {}}>
+            <Image source={IC_UPLOAD}></Image>
+            <Text style={styles.buttonText}>Upload files</Text>
+          </TouchableOpacity>
+          <Text style={styles.note}>Upload one or more midi files to generate music.</Text>
         </View>
       </SafeAreaView>
     );
@@ -86,9 +85,24 @@ const styles = StyleSheet.create({
     marginTop: scale(80, 'h'),
     alignSelf: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: 'black',
     borderRadius: 50,
     flexDirection: 'row',
+  },
+  buttonText: {
+    marginLeft: scale(15, 'w'),
+    fontSize: scale(20, 'h'),
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  note: {
+    marginTop: scale(10, 'h'),
+    fontSize: scale(16, 'h'),
+    fontStyle: 'italic',
+    color: 'black',
+    fontWeight: '400',
+    textAlign: 'center',
   },
 });
 
