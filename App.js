@@ -3,12 +3,13 @@ import { SafeAreaView, View, Text } from "react-native";
 import LoadingScreen from "./screens/LoadingScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import UploadScreen from "./screens/UploadScreen";
+import ExportScreen from "./screens/ExportScreen";
 
 
 const App = () => {
   return (
     <SafeAreaView>
-      <UploadScreen/>
+      <ExportScreen></ExportScreen>
     </SafeAreaView>
   );
 };
