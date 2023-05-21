@@ -8,10 +8,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import scale from '../scr/constants/responsive';
-import {IC_BACK, IC_DOWNLOAD} from '../scr/assets/icons';
+import {IC_BACK, IC_MUSIC} from '../scr/assets/icons';
 import { IMG_MUSIC } from '../scr/assets/images';
 
-export class ExportScreen extends Component {
+export class StartingScreen extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -21,17 +21,13 @@ export class ExportScreen extends Component {
               <Image source={IC_BACK}></Image>
             </TouchableOpacity>
           </View>
-          <Text style={styles.title}>Success!</Text>
-          <Text style={styles.subTitle}>Download the file to listen to {'\n'}the generated music.</Text>
+          <Text style={styles.title}>Let’s {'\n'}generate music</Text>
         </View>
         <View style={styles.bottomContainer}>
-            <View style={styles.block}>
-                <Image source={IMG_MUSIC}></Image>
-            </View>
-            <Text style={styles.fileName}>generated-music1.midi</Text>
+            <Text style={styles.fileStatus}>You have uploaded 2 files.</Text>
             <TouchableOpacity style={styles.buttonContainer} onPress={() => {}}>
-            <Image source={IC_DOWNLOAD}></Image>
-            <Text style={styles.buttonText}>Download</Text>
+            <Image source={IC_MUSIC}></Image>
+            <Text style={styles.buttonText}>Generate</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
@@ -56,23 +52,28 @@ const styles = StyleSheet.create({
     width: scale(30, 'w'),
     height: scale(30, 'h'),
   },
+  title: {
+    color: 'white',
+    fontSize: scale(40, 'w'),
+    marginLeft: scale(24, 'w'),
+    marginTop: scale(4, 'h'),
+    fontWeight: 'bold',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    textAlign: 'center',
+  },
   bottomContainer: {
     flex: 0.7,
     backgroundColor: 'white',
     borderTopStartRadius: scale(40, 'w'),
     borderTopEndRadius: scale(40, 'w'),
   },
-  title: {
-    color: 'white',
-    fontSize: scale(40, 'w'),
-    marginLeft: scale(24, 'w'),
-    marginTop: scale(26, 'h'),
-    fontWeight: 'bold',
-  },
-  subTitle: {
+  fileStatus: {
+    marginTop: scale(38, 'h'),
+    fontSize: scale(18, 'h'),
     color: 'black',
-    fontSize: scale(18, 'w'),
-    marginLeft: scale(24, 'w'),
+    fontWeight: '400',
+    textAlign: 'center',
   },
   block: {
     width: scale(228, 'w'),
@@ -83,13 +84,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'center',
     marginTop: scale(41, 'h'),
-  },
-  fileName: {
-    marginTop: scale(9, 'h'),
-    fontSize: scale(18, 'h'),
-    color: 'black',
-    fontWeight: '400',
-    textAlign: 'center',
   },
   buttonContainer: {
     width: scale(199, 'w'),
@@ -110,4 +104,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ExportScreen;
+export default StartingScreen;

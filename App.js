@@ -7,12 +7,13 @@ import SignUpScreen from "./screens/SignUpScreen";
 import ResetPasswordScreen from "./screens/ResetPasswordScreen";
 import UploadScreen from "./screens/UploadScreen";
 import ExportScreen from "./screens/ExportScreen";
+import StartingScreen from "./screens/StartingScreen";
 
 
 const App = () => {
   return (
     <SafeAreaView>
-      <ExportScreen></ExportScreen>
+      <StartingScreen></StartingScreen>
     </SafeAreaView>
   );
 };
