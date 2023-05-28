@@ -25,6 +25,7 @@ export class StartingScreen extends Component {
         </View>
         <View style={styles.bottomContainer}>
             <Text style={styles.fileStatus}>You have uploaded 2 files.</Text>
+            <Text style={styles.blackText}>Let’s click<Text style={styles.orangeText}> the button </Text>to {'\n'}generate new music {'\n'}based on your files!</Text>
             <TouchableOpacity style={styles.buttonContainer} onPress={() => {}}>
             <Image source={IC_MUSIC}></Image>
             <Text style={styles.buttonText}>Generate</Text>
@@ -75,6 +76,16 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     textAlign: 'center',
   },
+  blackText: {
+    marginTop: scale(38, 'h'),
+    fontSize: scale(28, 'h'),
+    color: 'black',
+    fontWeight: '900',
+    textAlign: 'center',
+  },
+  orangeText:{
+    color: '#FFA500',
+  },
   block: {
     width: scale(228, 'w'),
     height: scale(228, 'h'),
@@ -88,7 +99,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: scale(199, 'w'),
     height: scale(52, 'h'),
-    marginTop: scale(80, 'h'),
+    marginTop: scale(200, 'h'),
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
