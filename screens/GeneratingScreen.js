@@ -8,20 +8,55 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import scale from '../scr/constants/responsive';
-import { IMG_MUSICGENERATE } from '../scr/assets/images';
+import {IMG_MUSICGENERATE} from '../scr/assets/images';
 
-export class GeneratingScreen extends Component {
-  render() {
-    return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.img}>
-          <Image source={IMG_MUSICGENERATE}></Image>
-          <Text style={styles.text}>. . . G e n e r a t i n g . . .</Text>
-        </View>
-      </SafeAreaView>
+class Timer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      time: props.count,
+    };
+  }
+  componentDidMount() {
+    this.addInterval = setInterval(() => this.increase(), 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.addInterval);
+  }
+
+  increase = () => {
+    const {time} = this.state;
+    const {onIncrease} = this.props;
+    const newTime = time + 1;
+    onIncrease(newTime);
+    this.setState({time: newTime});
+  };
+
+  render(){
+    return(
+      <Text style={{color: 'white'}}> {this.state.time} </Text>
     );
   }
 }
+
+export const GeneratingScreen = ({props}) => {
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.img}>
+        <Image source={IMG_MUSICGENERATE}></Image>
+        <Text style={styles.text}>. . . G e n e r a t i n g . . .</Text>
+        <Timer
+          count={0}
+          onIncrease={count => {
+            if (count === 5) {
+              props.navigation.navigate('Export');
+            }
+          }}
+        />
+      </View>
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
