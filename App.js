@@ -1,19 +1,10 @@
-import React from "react";
-import { SafeAreaView, View, Text } from "react-native";
-import LoadingScreen from "./screens/LoadingScreen";
-import WelcomeScreen from "./screens/WelcomeScreen";
-import SignInScreen from "./screens/SignInScreen";
-import SignUpScreen from "./screens/SignUpScreen";
-import ResetPasswordScreen from "./screens/ResetPasswordScreen";
-
+import React from 'react';
+import AppNavigation from './navigation/AppNavigation';
 
 const App = () => {
   return (
-    <SafeAreaView>
-      <ResetPasswordScreen/>
-    </SafeAreaView>
+    <AppNavigation></AppNavigation>
   );
 };
 
 export default App;
-
