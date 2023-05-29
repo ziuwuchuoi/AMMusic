@@ -9,35 +9,35 @@ import {
 } from 'react-native';
 import scale from '../scr/constants/responsive';
 import {IC_BACK, IC_DOWNLOAD} from '../scr/assets/icons';
-import { IMG_MUSIC } from '../scr/assets/images';
+import {IMG_MUSIC} from '../scr/assets/images';
 
-export class ExportScreen extends Component {
-  render() {
-    return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.topContainer}>
-          <View style={styles.headerContainer}>
-            <TouchableOpacity style={styles.iconButton} onPress={()=> {}}>
-              <Image source={IC_BACK}></Image>
-            </TouchableOpacity>
-          </View>
-          <Text style={styles.title}>Success!</Text>
-          <Text style={styles.subTitle}>Download the file to listen to {'\n'}the generated music.</Text>
-        </View>
-        <View style={styles.bottomContainer}>
-            <View style={styles.block}>
-                <Image source={IMG_MUSIC}></Image>
-            </View>
-            <Text style={styles.fileName}>generated-music1.midi</Text>
-            <TouchableOpacity style={styles.buttonContainer} onPress={() => {}}>
-            <Image source={IC_DOWNLOAD}></Image>
-            <Text style={styles.buttonText}>Download</Text>
+export const ExportScreen = ({props}) => {
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.topContainer}>
+        <View style={styles.headerContainer}>
+          <TouchableOpacity style={styles.iconButton} onPress={() => {props.navigation.navigate('Upload')}}>
+            <Image source={IC_BACK}></Image>
           </TouchableOpacity>
         </View>
-      </SafeAreaView>
-    );
-  }
-}
+        <Text style={styles.title}>Success!</Text>
+        <Text style={styles.subTitle}>
+          Download the file to listen to {'\n'}the generated music.
+        </Text>
+      </View>
+      <View style={styles.bottomContainer}>
+        <View style={styles.block}>
+          <Image source={IMG_MUSIC}></Image>
+        </View>
+        <Text style={styles.fileName}>generated-music1.midi</Text>
+        <TouchableOpacity style={styles.buttonContainer} onPress={() => {}}>
+          <Image source={IC_DOWNLOAD}></Image>
+          <Text style={styles.buttonText}>Download</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

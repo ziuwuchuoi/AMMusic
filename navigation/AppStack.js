@@ -10,11 +10,21 @@ import StartingScreen from '../screens/StartingScreen';
 import UploadScreen from '../screens/UploadScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import GeneratingScreen from '../screens/GeneratingScreen';
+import { useNavigation } from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 export default function AppStack() {
+  const navigation = useNavigation();
+
   return (
-    <Stack.Navigator initialRouteName="Generating" options={{headerShown: false}}>
+    <Stack.Navigator
+      initialRouteName="Upload"
+      options={{headerShown: false}}>
+      <Stack.Screen
+        name="Loading"
+        component={LoadingScreen}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="Welcome"
         component={WelcomeScreen}
@@ -37,25 +47,28 @@ export default function AppStack() {
       />
       <Stack.Screen
         name="Upload"
-        component={UploadScreen}
         options={{headerShown: false}}
-      />
+      >
+        {navigation => <UploadScreen props={navigation}/>}
+      </Stack.Screen> 
       <Stack.Screen
         name="Starting"
-        component={StartingScreen}
         options={{headerShown: false}}
-      />
-      <Stack.Screen
-        name="Loading"
-        component={LoadingScreen}
-        options={{headerShown: false}}
-      />
+      >
+        {navigation => <StartingScreen props={navigation}/>}
+      </Stack.Screen>
       <Stack.Screen
         name="Generating"
-        component={GeneratingScreen}
         options={{headerShown: false}}
-      />
-      <Stack.Screen name="Export" component={ExportScreen} />
+      >
+        {navigation => <GeneratingScreen props={navigation}/>}
+      </Stack.Screen>
+      <Stack.Screen
+        name="Export"
+        options={{headerShown: false}}
+      >
+        {navigation => <ExportScreen props={navigation}/>}
+      </Stack.Screen>
     </Stack.Navigator>
   );
 }

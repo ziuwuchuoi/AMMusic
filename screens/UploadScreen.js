@@ -10,9 +10,9 @@ import {
 import scale from '../scr/constants/responsive';
 import {IMG_LOGO} from '../scr/assets/images';
 import {IC_UPLOAD} from '../scr/assets/icons';
+import { useNavigation } from '@react-navigation/native';
 
-export class UploadScreen extends Component {
-  render() {
+export const UploadScreen = ({props}) => {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.topContainer}>
@@ -28,7 +28,7 @@ export class UploadScreen extends Component {
           <Text style={styles.reviewTitle}>
             This app will generate {'\n'}music based on your music files!
           </Text>
-          <TouchableOpacity style={styles.buttonContainer} onPress={() => {}}>
+          <TouchableOpacity style={styles.buttonContainer} onPress={() => {props.navigation.navigate("Starting")}}>
             <Image source={IC_UPLOAD}></Image>
             <Text style={styles.buttonText}>Upload files</Text>
           </TouchableOpacity>
@@ -37,7 +37,6 @@ export class UploadScreen extends Component {
       </SafeAreaView>
     );
   }
-}
 
 const styles = StyleSheet.create({
   container: {
