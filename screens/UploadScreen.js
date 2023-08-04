@@ -28,7 +28,9 @@ export const UploadScreen = ({props}) => {
           <Text style={styles.reviewTitle}>
             This app will generate {'\n'}music based on your music files!
           </Text>
-          <TouchableOpacity style={styles.buttonContainer} onPress={() => {props.navigation.navigate("Starting")}}>
+          <TouchableOpacity style={styles.buttonContainer}
+          onPress={()=> this.props.navigation.navigate("Starting")}>
+
             <Image source={IC_UPLOAD}></Image>
             <Text style={styles.buttonText}>Upload files</Text>
           </TouchableOpacity>

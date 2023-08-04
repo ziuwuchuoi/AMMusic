@@ -7,20 +7,33 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  Alert
 } from 'react-native';
 import scale from '../scr/constants/responsive';
 import {IC_BACK, IC_FACEBOOK, IC_GOOGLE, IC_NEXT} from '../scr/assets/icons';
 
 export class SignInScreen extends Component {
+  state = {
+    username: '',
+    password: '',
+  }
+
+  checkInfo = (username, password) => {
+    if(username === '' || password === '')
+      return false;
+    return true;
+  }
   render() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.container1}>
           <View style={styles.subcontainer1}>
-            <TouchableOpacity>
+            <TouchableOpacity
+            onPress={()=> this.props.navigation.goBack()}>
               <Image source={IC_BACK}></Image>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonContainer1}>
+            <TouchableOpacity style={styles.buttonContainer1}
+            onPress={()=> this.props.navigation.navigate("SignUp")}>
               <Text style={styles.button1}>Register</Text>
             </TouchableOpacity>
           </View>
@@ -31,16 +44,23 @@ export class SignInScreen extends Component {
           <TextInput
             style={styles.textInput}
             placeholder="Username"
-            placeholderTextColor={'black'}></TextInput>
+            placeholderTextColor={'black'}
+            onChangeText={Username => this.setState({username: Username})}></TextInput>
           <TextInput
             style={styles.textInput}
             placeholder="Password"
-            placeholderTextColor={'black'}></TextInput>
-          <TouchableOpacity style={styles.buttonContainer2}>
+            placeholderTextColor={'black'}
+            onChangeText={Password => this.setState({password: Password})}></TextInput>
+          <TouchableOpacity style={styles.buttonContainer2}
+          onPress={()=> this.props.navigation.navigate("ResetPW")}>
             <Text style={styles.button2}>Forget Password</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.buttonContainer3}>
+          <TouchableOpacity style={styles.buttonContainer3}
+          onPress={()=> {
+            this.checkInfo(this.state.username,this.state.password) ? this.props.navigation.navigate('Upload') : 
+            Alert.alert('You need to fill full the information to Sign in!')
+          }}>
             <Text style={styles.button3}>Sign In</Text>
           </TouchableOpacity>
 
