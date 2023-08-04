@@ -104,5 +104,4 @@ export default function AppStack() {
           component={ExportScreen} />
       </Stack.Navigator>
   )
-
 }

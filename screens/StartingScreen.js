@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import scale from '../scr/constants/responsive';
 import {IC_BACK, IC_MUSIC} from '../scr/assets/icons';
-import { IMG_MUSIC } from '../scr/assets/images';
 
 export class StartingScreen extends Component {
   render() {
@@ -32,10 +31,22 @@ export class StartingScreen extends Component {
             <Text style={styles.buttonText}>Generate</Text>
           </TouchableOpacity>
         </View>
-      </SafeAreaView>
-    );
-  }
-}
+        <Text style={styles.title}>Let’s {'\n'}generate music</Text>
+      </View>
+      <View style={styles.bottomContainer}>
+        <Text style={styles.fileStatus}>You have uploaded 2 files.</Text>
+        <Text style={styles.blackText}>
+          Let’s click<Text style={styles.orangeText}> the button </Text>to{' '}
+          {'\n'}generate new music {'\n'}based on your files!
+        </Text>
+        <TouchableOpacity style={styles.buttonContainer} onPress={() => {props.navigation.navigate('Generating')}}>
+          <Image source={IC_MUSIC}></Image>
+          <Text style={styles.buttonText}>Generate</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -84,7 +95,7 @@ const styles = StyleSheet.create({
     fontWeight: '900',
     textAlign: 'center',
   },
-  orangeText:{
+  orangeText: {
     color: '#FFA500',
   },
   block: {
