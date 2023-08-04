@@ -26,7 +26,8 @@ export class StartingScreen extends Component {
         <View style={styles.bottomContainer}>
             <Text style={styles.fileStatus}>You have uploaded 2 files.</Text>
             <Text style={styles.blackText}>Let’s click<Text style={styles.orangeText}> the button </Text>to {'\n'}generate new music {'\n'}based on your files!</Text>
-            <TouchableOpacity style={styles.buttonContainer} onPress={() => {}}>
+            <TouchableOpacity style={styles.buttonContainer}
+            onPress={()=> this.props.navigation.navigate("Generating")}>
             <Image source={IC_MUSIC}></Image>
             <Text style={styles.buttonText}>Generate</Text>
           </TouchableOpacity>

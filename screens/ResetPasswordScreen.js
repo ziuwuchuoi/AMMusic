@@ -16,7 +16,8 @@ export class ResetPasswordScreen extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.container1}>
-          <TouchableOpacity>
+          <TouchableOpacity 
+          onPress={()=> this.props.navigation.goBack()}>
             <Image source={IC_BACK} style={styles.backIcon}></Image>
           </TouchableOpacity>
           <Text style={styles.text}>Reset Password</Text>
@@ -38,13 +39,15 @@ export class ResetPasswordScreen extends Component {
             placeholder="Confirm password"
             placeholderTextColor={'black'}></TextInput>
 
-          <TouchableOpacity style={styles.buttonContainer1}>
+          <TouchableOpacity style={styles.buttonContainer1} 
+          onPress={()=> this.props.navigation.navigate("SignIn")}>
             <Text style={styles.button1}>Reset password</Text>
           </TouchableOpacity>
 
           <View style={styles.subContainer2}>
             <Text style={styles.text2}>Already have an account?</Text>
-            <TouchableOpacity>
+            <TouchableOpacity
+            onPress={()=> this.props.navigation.navigate("SignIn")}>
               <Text style={styles.buttonText2}> Sign In</Text>
             </TouchableOpacity>
           </View>

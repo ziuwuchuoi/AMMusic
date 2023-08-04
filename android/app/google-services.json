@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "16719729848",
+    "project_id": "ammusic-f9362",
+    "storage_bucket": "ammusic-f9362.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16719729848:android:89e992d06d062de183d04d",
+        "android_client_info": {
+          "package_name": "com.ammusic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "16719729848-1hktl2pptj7eek5ol47940qkoqsabva9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ammusic",
+            "certificate_hash": "271c24b5c3aca6bfdb3c92e7d49eab8b8959c719"
+          }
+        },
+        {
+          "client_id": "16719729848-pcckefiirvcelboktou4rtfqmkts5d75.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNtWmd6VTr2la2w9lsZK7qovvY41QgFNk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "16719729848-pcckefiirvcelboktou4rtfqmkts5d75.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

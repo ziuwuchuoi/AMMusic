@@ -29,11 +29,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   img: {
-    marginTop: scale(160, 'h'),
-    alignSelf: 'center',
+    marginTop: scale(200, 'h'),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   text: {
-    alignSelf: 'center',
     textAlign: 'center',
     marginTop: scale(40, 'h'),
     fontSize: scale(25, 'h'),
