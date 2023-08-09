@@ -16,11 +16,13 @@ export class WelcomeScreen extends Component {
                 <Text style={styles.text1}>Welcome!</Text>
                 <Text style={styles.subtext1}>You can generate music based on your music files. We hope you have the good experiences in this app.</Text>
                 <View style={styles.subcontainer}>
-                    <TouchableOpacity style={styles.buttonContainer1}>
+                    <TouchableOpacity style={styles.buttonContainer1} 
+                    onPress={()=> this.props.navigation.navigate('SignIn')}>
                         <Text style={styles.button1}>Sign In</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.buttonContainer2}>
+                    <TouchableOpacity style={styles.buttonContainer2}
+                    onPress={()=> this.props.navigation.navigate("SignUp")}>
                         <Text style={styles.button2}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>

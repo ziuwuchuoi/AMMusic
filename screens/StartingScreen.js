@@ -10,13 +10,25 @@ import {
 import scale from '../scr/constants/responsive';
 import {IC_BACK, IC_MUSIC} from '../scr/assets/icons';
 
-export const StartingScreen = ({props}) => {
-  return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.topContainer}>
-        <View style={styles.headerContainer}>
-          <TouchableOpacity style={styles.iconButton} onPress={() => {props.navigation.goBack()}}>
-            <Image source={IC_BACK}></Image>
+export class StartingScreen extends Component {
+  render() {
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.topContainer}>
+          <View style={styles.headerContainer}>
+            <TouchableOpacity style={styles.iconButton} onPress={()=> {}}>
+              <Image source={IC_BACK}></Image>
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.title}>Let’s {'\n'}generate music</Text>
+        </View>
+        <View style={styles.bottomContainer}>
+            <Text style={styles.fileStatus}>You have uploaded 2 files.</Text>
+            <Text style={styles.blackText}>Let’s click<Text style={styles.orangeText}> the button </Text>to {'\n'}generate new music {'\n'}based on your files!</Text>
+            <TouchableOpacity style={styles.buttonContainer}
+            onPress={()=> this.props.navigation.navigate("Generating")}>
+            <Image source={IC_MUSIC}></Image>
+            <Text style={styles.buttonText}>Generate</Text>
           </TouchableOpacity>
         </View>
         <Text style={styles.title}>Let’s {'\n'}generate music</Text>

@@ -5,6 +5,9 @@ import scale from "../scr/constants/responsive";
 
 export class LoadingScreen extends Component {
     render() {
+        setTimeout(()=> {
+            this.props.navigation.navigate('Welcome');
+        }, 5000);
         return (
             <SafeAreaView style={styles.container}>
                 <ImageBackground source={IMG_LOADING} style={styles.image}>
