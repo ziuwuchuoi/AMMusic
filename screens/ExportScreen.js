@@ -10,13 +10,15 @@ import {
 import scale from '../scr/constants/responsive';
 import {IC_BACK, IC_DOWNLOAD} from '../scr/assets/icons';
 import {IMG_MUSIC} from '../scr/assets/images';
+import { useNavigation } from '@react-navigation/native';
 
 export const ExportScreen = ({props}) => {
+  const navigation = useNavigation()
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topContainer}>
         <View style={styles.headerContainer}>
-          <TouchableOpacity style={styles.iconButton} onPress={() => {props.navigation.navigate('Upload')}}>
+          <TouchableOpacity style={styles.iconButton} onPress={() => {navigation.navigate('Upload')}}>
             <Image source={IC_BACK}></Image>
           </TouchableOpacity>
         </View>

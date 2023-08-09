@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -7,54 +7,72 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  Alert,
 } from 'react-native';
 import scale from '../scr/constants/responsive';
 import {IC_BACK, IC_FACEBOOK, IC_GOOGLE, IC_NEXT} from '../scr/assets/icons';
+import { useNavigation } from '@react-navigation/native';
+import {firebase} from '../configs/firebase'
 
-export class ResetPasswordScreen extends Component {
-  render() {
-    return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.container1}>
-          <TouchableOpacity 
-          onPress={()=> this.props.navigation.goBack()}>
-            <Image source={IC_BACK} style={styles.backIcon}></Image>
-          </TouchableOpacity>
-          <Text style={styles.text}>Reset Password</Text>
-          <Text style={styles.subtext}>
-            Let’s reset password to enjoy this app.
-          </Text>
-        </View>
-        <View style={styles.container2}>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Email"
-            placeholderTextColor={'black'}></TextInput>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Password"
-            placeholderTextColor={'black'}></TextInput>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Confirm password"
-            placeholderTextColor={'black'}></TextInput>
+const ResetPasswordScreen = () => {
+  const navigation = useNavigation()
+  const [email, setEmail] = useState('')
 
-          <TouchableOpacity style={styles.buttonContainer1} 
+    changePassword = async(email) => {
+      try {
+        await firebase.auth().sendPasswordResetEmail(email)
+        .then(() => {
+             Alert.alert("Password reset email sent")
+             navigation.navigate('SignIn')
+        }).catch ((error) => {
+             Alert.alert(error.message)
+        })
+      } catch (error) {
+        Alert.alert(error.message)
+      }
+    }
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.container1}>
+        <TouchableOpacity 
+        onPress={()=> navigation.goBack()}>
+          <Image source={IC_BACK} style={styles.backIcon}></Image>
+        </TouchableOpacity>
+        <Text style={styles.text}>Reset Password</Text>
+        <Text style={styles.subtext}>
+          Let’s reset password to enjoy this app.
+        </Text>
+      </View>
+      <View style={styles.container2}>
+        <TextInput
+          style={[styles.textInput, {marginTop: scale(100, 'h')}]}
+          placeholder="Email"
+          placeholderTextColor={'black'}
+          onChangeText={Email => setEmail(Email)}></TextInput>
+        {/* <TextInput
+          style={styles.textInput}
+          placeholder="Password"
+          placeholderTextColor={'black'}></TextInput>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Confirm password"
+          placeholderTextColor={'black'}></TextInput> */}
+
+        <TouchableOpacity style={styles.buttonContainer1} 
+        onPress={()=> changePassword(email) }>
+          <Text style={styles.button1}>Reset password</Text>
+        </TouchableOpacity>
+
+        <View style={styles.subContainer2}>
+          <Text style={styles.text2}>Already have an account?</Text>
+          <TouchableOpacity
           onPress={()=> this.props.navigation.navigate("SignIn")}>
-            <Text style={styles.button1}>Reset password</Text>
+            <Text style={styles.buttonText2}> Sign In</Text>
           </TouchableOpacity>
-
-          <View style={styles.subContainer2}>
-            <Text style={styles.text2}>Already have an account?</Text>
-            <TouchableOpacity
-            onPress={()=> this.props.navigation.navigate("SignIn")}>
-              <Text style={styles.buttonText2}> Sign In</Text>
-            </TouchableOpacity>
-          </View>
         </View>
-      </SafeAreaView>
-    );
-  }
+      </View>
+    </SafeAreaView>
+  );
 }
 
 export default ResetPasswordScreen;

@@ -12,6 +12,14 @@ import WelcomeScreen from '../screens/WelcomeScreen';
 import GeneratingScreen from '../screens/GeneratingScreen';
 import { useNavigation } from '@react-navigation/native';
 import {firebase} from '../configs/firebase'
+// import * as tf from '@tensorflow/tfjs';
+
+// async function loadModel() {
+//   const model = await tf.loadLayersModel('model.json');
+//   model.summary();
+// }
+
+
 
 const Stack = createNativeStackNavigator();
 export default function AppStack() {
@@ -27,6 +35,7 @@ export default function AppStack() {
 
   useEffect(() => {
     const subcriber = firebase.auth().onAuthStateChanged(onAuthStateChanged)
+    // loadModel();
     return subcriber
   }, [])
 
@@ -77,7 +86,10 @@ export default function AppStack() {
         />
         <Stack.Screen 
           name="Export" 
-          component={ExportScreen} />
+          component={ExportScreen} 
+          options={{headerShown: false}}
+          />
+
       </Stack.Navigator>
     );
   }

@@ -31,8 +31,7 @@ export class StartingScreen extends Component {
             <Text style={styles.buttonText}>Generate</Text>
           </TouchableOpacity>
         </View>
-        <Text style={styles.title}>Let’s {'\n'}generate music</Text>
-      </View>
+      {/* <Text style={styles.title}>Let’s {'\n'}generate music</Text>
       <View style={styles.bottomContainer}>
         <Text style={styles.fileStatus}>You have uploaded 2 files.</Text>
         <Text style={styles.blackText}>
@@ -43,10 +42,10 @@ export class StartingScreen extends Component {
           <Image source={IC_MUSIC}></Image>
           <Text style={styles.buttonText}>Generate</Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </SafeAreaView>
   );
-};
+}};
 
 const styles = StyleSheet.create({
   container: {

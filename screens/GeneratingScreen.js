@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import scale from '../scr/constants/responsive';
 import {IMG_MUSICGENERATE} from '../scr/assets/images';
+import { useNavigation } from '@react-navigation/native';
 
 class Timer extends React.Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class Timer extends React.Component {
 }
 
 export const GeneratingScreen = ({props}) => {
+  const navigation = useNavigation()
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.img}>
@@ -49,7 +51,7 @@ export const GeneratingScreen = ({props}) => {
           count={0}
           onIncrease={count => {
             if (count === 5) {
-              props.navigation.navigate('Export');
+              navigation.navigate('Export');
             }
           }}
         />
