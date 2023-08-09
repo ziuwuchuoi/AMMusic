@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -11,29 +11,39 @@ import {
 } from 'react-native';
 import scale from '../scr/constants/responsive';
 import {IC_BACK, IC_FACEBOOK, IC_GOOGLE, IC_NEXT} from '../scr/assets/icons';
+import TextBox from '../scr/components/TextBox';
+import { useNavigation } from '@react-navigation/native';
+import {firebase} from '../configs/firebase'
 
-export class SignInScreen extends Component {
-  state = {
-    username: '',
-    password: '',
+const SignInScreen = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const navigation = useNavigation()
+
+  checkInfo = (email, password) => {
+    if(email ==='' || password === '')
+      return 1;
+    return 0;
   }
 
-  checkInfo = (username, password) => {
-    if(username === '' || password === '')
-      return false;
-    return true;
+  const handleLogin = async (email, password) => {
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password)
+    } catch (error){
+      Alert.alert(error.message)
+    }
   }
-  render() {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.container1}>
           <View style={styles.subcontainer1}>
             <TouchableOpacity
-            onPress={()=> this.props.navigation.goBack()}>
+            onPress={()=> navigation.goBack()}>
               <Image source={IC_BACK}></Image>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonContainer1}
-            onPress={()=> this.props.navigation.navigate("SignUp")}>
+            onPress={()=> navigation.navigate("SignUp")}>
               <Text style={styles.button1}>Register</Text>
             </TouchableOpacity>
           </View>
@@ -41,7 +51,7 @@ export class SignInScreen extends Component {
           <Text style={styles.subtext}>Let’s sign in to enjoy this app.</Text>
         </View>
         <View style={styles.container2}>
-          <TextInput
+          {/* <TextInput
             style={styles.textInput}
             placeholder="Username"
             placeholderTextColor={'black'}
@@ -50,21 +60,32 @@ export class SignInScreen extends Component {
             style={styles.textInput}
             placeholder="Password"
             placeholderTextColor={'black'}
-            onChangeText={Password => this.setState({password: Password})}></TextInput>
+            onChangeText={Password => this.setState({password: Password})}></TextInput> */}
+            <TextBox
+            text={email}
+            placeholder="Email"
+            onChangeText={Email => setEmail(Email)}
+          />
+          <TextBox
+            text={password}
+            placeholder="Password"
+            secureTextEntry={true}
+            onChangeText={Password => setPassword(Password)}
+          />
           <TouchableOpacity style={styles.buttonContainer2}
-          onPress={()=> this.props.navigation.navigate("ResetPW")}>
+          onPress={()=> navigation.navigate("ResetPW")}>
             <Text style={styles.button2}>Forget Password</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.buttonContainer3}
           onPress={()=> {
-            this.checkInfo(this.state.username,this.state.password) ? this.props.navigation.navigate('Upload') : 
-            Alert.alert('You need to fill full the information to Sign in!')
+            checkInfo(email, password) === 0 ? handleLogin(email, password) : 
+            Alert.alert('You need to fill in full the information to Sign in!')
           }}>
             <Text style={styles.button3}>Sign In</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={[styles.buttonContainer4, styles.shadow]}>
+          {/* <TouchableOpacity style={[styles.buttonContainer4, styles.shadow]}>
             <Image source={IC_GOOGLE}></Image>
             <Text style={styles.textButton}>Continue with Google</Text>
             <Image source={IC_NEXT} style={styles.nextIcon}></Image>
@@ -74,11 +95,10 @@ export class SignInScreen extends Component {
             <Image source={IC_FACEBOOK}></Image>
             <Text style={styles.textButton}>Continue with Facebook</Text>
             <Image source={IC_NEXT} style={styles.nextIcon}></Image>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </SafeAreaView>
     );
-  }
 }
 
 export default SignInScreen;

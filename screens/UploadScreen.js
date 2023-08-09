@@ -13,6 +13,7 @@ import {IC_UPLOAD} from '../scr/assets/icons';
 import { useNavigation } from '@react-navigation/native';
 
 export const UploadScreen = ({props}) => {
+  const navigation = useNavigation()
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.topContainer}>
@@ -29,7 +30,7 @@ export const UploadScreen = ({props}) => {
             This app will generate {'\n'}music based on your music files!
           </Text>
           <TouchableOpacity style={styles.buttonContainer}
-          onPress={()=> this.props.navigation.navigate("Starting")}>
+          onPress={()=> navigation.navigate("Starting")}>
 
             <Image source={IC_UPLOAD}></Image>
             <Text style={styles.buttonText}>Upload files</Text>

@@ -13,6 +13,7 @@ import scale from '../scr/constants/responsive';
 import {IC_BACK, IC_FACEBOOK, IC_GOOGLE, IC_NEXT} from '../scr/assets/icons';
 import { useNavigation } from '@react-navigation/native';
 import {firebase} from '../configs/firebase'
+import TextBox from '../scr/components/TextBox';
 
 const SignUpScreen = () => {
   const navigation = useNavigation()
@@ -117,13 +118,35 @@ const SignUpScreen = () => {
         <Text style={styles.subtext}>Let’s sign up to enjoy this app.</Text>
       </View>
       <View style={styles.container2}>
-        <TextInput
+        {/* <TextInput
           style={styles.textInput}
           placeholder="Username"
           placeholderTextColor={'black'}
           cursorColor={'black'}
-          onChangeText={Username => setUsername(Username) }></TextInput>
-        <TextInput
+          onChangeText={Username => setUsername(Username) }></TextInput> */}
+          <TextBox
+            text={username}
+            placeholder="Username"
+            onChangeText={Username => setUsername(Username)}
+          />
+          <TextBox
+            text={email}
+            placeholder="Email"
+            onChangeText={Email => setEmail(Email)}
+          />
+          <TextBox
+            text={password}
+            placeholder="Password"
+            secureTextEntry={true}
+            onChangeText={Password => setPassword(Password)}
+          />
+          <TextBox
+            text={confirmpass}
+            placeholder="Confirm Password"
+            secureTextEntry={true}
+            onChangeText={Confirmpass => setConfirmpass(Confirmpass)}
+          />
+        {/* <TextInput
           style={styles.textInput}
           placeholder="Email"
           placeholderTextColor={'black'}
@@ -140,7 +163,7 @@ const SignUpScreen = () => {
           placeholder="Confirm password"
           placeholderTextColor={'black'}
           cursorColor={'black'}
-          onChangeText={Confirmpass => setConfirmpass(Confirmpass) }></TextInput>
+          onChangeText={Confirmpass => setConfirmpass(Confirmpass) }></TextInput> */}
 
         <TouchableOpacity style={styles.buttonContainer1}
         onPress={() => {
@@ -149,7 +172,7 @@ const SignUpScreen = () => {
           (
             checkInfo(username, email, password, confirmpass) === 2 ? 
             Alert.alert('Your password and your confirm password does not match!') :
-            handleSignUp()
+            handleSignUp(username, email, password)
           )
         }}>
           <Text style={styles.button1}>Sign Up</Text>
