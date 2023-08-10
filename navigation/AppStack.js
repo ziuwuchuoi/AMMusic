@@ -64,7 +64,7 @@ export default function AppStack() {
       const modelJson =  require("../scr/assets/model/model.json");
       const modelWeight = require("../scr/assets/model/group1-shard.bin");
       console.log('1')
-      const mucsicGenerator = await tf.loadLayersModel(bundleResourceIO(modelJson,modelWeight));
+      //const mucsicGenerator = await tf.loadLayersModel(bundleResourceIO(modelJson,modelWeight));
       // console.log("[+] Loading pre-trained face detection model")
       //Blazeface is a face detection model provided by Google
       // const faceDetector =  await blazeface.load();
