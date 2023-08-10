@@ -12,13 +12,14 @@ import WelcomeScreen from '../screens/WelcomeScreen';
 import GeneratingScreen from '../screens/GeneratingScreen';
 import { useNavigation } from '@react-navigation/native';
 import {firebase} from '../configs/firebase'
+import * as tf from '@tensorflow/tfjs';
+import { fetch, bundleResourceIO } from '@tensorflow/tfjs-react-native';
 // import * as tf from '@tensorflow/tfjs';
 
 // async function loadModel() {
 //   const model = await tf.loadLayersModel('model.json');
 //   model.summary();
 // }
-
 
 
 const Stack = createNativeStackNavigator();
@@ -33,11 +34,47 @@ export default function AppStack() {
       setInitializing(false);
   }
 
+
+
+  // const modelJson =  require("../scr/assets/model/model.json");
+  // const modelWeights = require("../scr/assets/model/group1-shard.bin");
+
+
+  // const loadModel = async (modelJSON, modelWeights) => {
+  //   const model = await tf
+  //     .loadLayersModel(bundleResourceIO(modelJSON, modelWeights))
+  //     .catch(e => console.log(e));
+  //   console.log("Model loaded!");
+  //   return model;
+  // };
+
   useEffect(() => {
     const subcriber = firebase.auth().onAuthStateChanged(onAuthStateChanged)
-    // loadModel();
+    // loadModel(modelJson, modelWeights);
     return subcriber
   }, [])
+
+  useEffect(() => {
+    async function loadModel(){
+      console.log("[+] Application started")
+      //Wait for tensorflow module to be ready
+      const tfReady = await tf.ready();
+      console.log("[+] Loading custom music generation model")
+      //Replce model.json and group1-shard.bin with your own custom model
+      const modelJson =  require("../scr/assets/model/model.json");
+      const modelWeight = require("../scr/assets/model/group1-shard.bin");
+      console.log('1')
+      const mucsicGenerator = await tf.loadLayersModel(bundleResourceIO(modelJson,modelWeight));
+      // console.log("[+] Loading pre-trained face detection model")
+      //Blazeface is a face detection model provided by Google
+      // const faceDetector =  await blazeface.load();
+      //Assign model to variable
+      // setMaskDetector(maskDetector)
+      // setFaceDetector(faceDetector)
+      console.log("[+] Model Loaded")
+    }
+    loadModel()
+  }, []); 
 
   if (intializing) return null
 
