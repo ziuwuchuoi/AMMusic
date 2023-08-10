@@ -9,16 +9,15 @@ import {
 } from 'react-native';
 import scale from '../scr/constants/responsive';
 import {IC_BACK, IC_MUSIC} from '../scr/assets/icons';
-import {utils} from '@react-native-firebase/app'
-import storage from '@react-native-firebase/storage'
-import RNFetchBlob from 'rn-fetch-blob'
-import { PermissionsAndroid } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-
+import {utils} from '@react-native-firebase/app';
+import storage from '@react-native-firebase/storage';
+import RNFetchBlob from 'rn-fetch-blob';
+import {PermissionsAndroid} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const StartingScreen = () => {
-  const navigation = useNavigation()
-  const [file, setFile] = useState()
+  const navigation = useNavigation();
+  const [file, setFile] = useState();
   async function pickDocument() {
     try {
       // let index = 0
@@ -36,14 +35,12 @@ const StartingScreen = () => {
       //   ...prevData,
       //   result[0]
       // ]);
-      setFile(result[0])
-
+      setFile(result[0]);
 
       // index++;
 
-      console.log(file)
-      navigation.navigate("Generating")
-
+      console.log(file);
+      navigation.navigate('Generating');
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
         // User cancelled the picker
@@ -53,62 +50,61 @@ const StartingScreen = () => {
     }
   }
 
-
-
-async function requestStoragePermission() {
-  try {
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-      {
-        title: "Storage Permission",
-        message:
-          "This app needs access to your storage " +
-          "so you can upload files.",
-        buttonNeutral: "Ask Me Later",
-        buttonNegative: "Cancel",
-        buttonPositive: "OK"
+  async function requestStoragePermission() {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+        {
+          title: 'Storage Permission',
+          message:
+            'This app needs access to your storage ' +
+            'so you can upload files.',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        console.log('You can now access storage');
+      } else {
+        console.log('Storage permission denied');
       }
-    );
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log("You can now access storage");
-    } else {
-      console.log("Storage permission denied");
+    } catch (err) {
+      console.warn(err);
     }
-  } catch (err) {
-    console.warn(err);
   }
-}
 
-async function uriToBlob(uri) {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.onload = function() {
-      resolve(xhr.response);
-    };
-    xhr.onerror = function() {
-      reject(new Error('uriToBlob failed'));
-    };
-    xhr.responseType = 'blob';
-    xhr.open('GET', uri, true);
-    xhr.send(null);
-  });
-}
+  async function uriToBlob(uri) {
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        resolve(xhr.response);
+      };
+      xhr.onerror = function () {
+        reject(new Error('uriToBlob failed'));
+      };
+      xhr.responseType = 'blob';
+      xhr.open('GET', uri, true);
+      xhr.send(null);
+    });
+  }
 
   const handleUpload = async () => {
-
-    await requestStoragePermission()
+    await requestStoragePermission();
 
     if (file) {
       try {
         const blob = await uriToBlob(file.uri);
-        console.log(blob)
+        console.log(blob);
         const reference = storage().ref().child(`files/${Date.now()}`);
         const task = reference.put(blob);
 
-        task.on('state_changed', (snapshot) => {
-          console.log(file)
+        task.on('state_changed', snapshot => {
+          console.log(file);
           console.log(
-            `${(snapshot.bytesTransferred / snapshot.totalBytes) * 100}% completed`
+            `${
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            }% completed`,
           );
         });
 
@@ -126,22 +122,32 @@ async function uriToBlob(uri) {
     <SafeAreaView style={styles.container}>
       <View style={styles.topContainer}>
         <View style={styles.headerContainer}>
-          <TouchableOpacity style={styles.iconButton} onPress={()=> {navigation.goBack()}}>
+          <TouchableOpacity
+            style={styles.iconButton}
+            onPress={() => {
+              navigation.goBack();
+            }}>
             <Image source={IC_BACK}></Image>
           </TouchableOpacity>
         </View>
         <Text style={styles.title}>Let’s {'\n'}generate music</Text>
       </View>
       <View style={styles.bottomContainer}>
-          <Text style={styles.fileStatus}>You have already uploaded the file.</Text>
-          <Text style={styles.blackText}>Let’s click<Text style={styles.orangeText}> the button </Text>to {'\n'}generate new music {'\n'}based on your files!</Text>
-          <TouchableOpacity style={styles.buttonContainer}
-          onPress={()=> pickDocument() }>
+        <Text style={styles.fileStatus}>
+          You have already uploaded the file.
+        </Text>
+        <Text style={styles.blackText}>
+          Let’s click<Text style={styles.orangeText}> the button </Text>to{' '}
+          {'\n'}generate new music {'\n'}based on your files!
+        </Text>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={() => navigation.navigate('Generating')}>
           <Image source={IC_MUSIC}></Image>
           <Text style={styles.buttonText}>Generate</Text>
         </TouchableOpacity>
       </View>
-    {/* <Text style={styles.title}>Let’s {'\n'}generate music</Text>
+      {/* <Text style={styles.title}>Let’s {'\n'}generate music</Text>
     <View style={styles.bottomContainer}>
       <Text style={styles.fileStatus}>You have uploaded 2 files.</Text>
       <Text style={styles.blackText}>
@@ -153,8 +159,8 @@ async function uriToBlob(uri) {
         <Text style={styles.buttonText}>Generate</Text>
       </TouchableOpacity>
     </View> */}
-  </SafeAreaView>
-);
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({
