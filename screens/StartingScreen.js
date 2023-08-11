@@ -10,15 +10,16 @@ import {
 import scale from '../scr/constants/responsive';
 import {IC_BACK, IC_MUSIC} from '../scr/assets/icons';
 
-
-
 const StartingScreen = () => {
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topContainer}>
         <View style={styles.headerContainer}>
-          <TouchableOpacity style={styles.iconButton} onPress={()=> {navigation.goBack()}}>
+          <TouchableOpacity
+            style={styles.iconButton}
+            onPress={() => {
+              navigation.goBack();
+            }}>
             <Image source={IC_BACK}></Image>
           </TouchableOpacity>
         </View>
@@ -33,7 +34,7 @@ const StartingScreen = () => {
           <Text style={styles.buttonText}>Generate</Text>
         </TouchableOpacity>
       </View>
-    {/* <Text style={styles.title}>Let’s {'\n'}generate music</Text>
+      {/* <Text style={styles.title}>Let’s {'\n'}generate music</Text>
     <View style={styles.bottomContainer}>
       <Text style={styles.fileStatus}>You have uploaded 2 files.</Text>
       <Text style={styles.blackText}>
@@ -45,8 +46,8 @@ const StartingScreen = () => {
         <Text style={styles.buttonText}>Generate</Text>
       </TouchableOpacity>
     </View> */}
-  </SafeAreaView>
-);
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({
